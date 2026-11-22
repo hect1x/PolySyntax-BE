@@ -30,7 +30,7 @@ func main() {
 		// Protected routes
 		r.Group(func(r chi.Router) {
 			r.Use(appmiddleware.APIKeyAuth(cfg.APIKey))
-			// handler.RegisterXxxRoutes(r)
+		handler.RegisterObjectiveRoutes(r)
 		})
 	})
 
