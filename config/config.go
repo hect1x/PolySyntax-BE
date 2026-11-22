@@ -8,8 +8,9 @@ import (
 
 
 type Config struct {
-	Addr string
-	Env  string
+	Addr   string
+	Env    string
+	APIKey string
 }
 
 func Load() *Config {
@@ -28,7 +29,8 @@ func Load() *Config {
 	}
 
 	return &Config{
-		Addr: addr,
-		Env:  env,
+		Addr:   addr,
+		Env:    env,
+		APIKey: os.Getenv("API_KEY"),
 	}
 }

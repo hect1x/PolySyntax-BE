@@ -6,6 +6,7 @@ import (
 
 	"polysyntax-be/config"
 	"polysyntax-be/internal/handler"
+	appmiddleware "polysyntax-be/internal/middleware"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -25,6 +26,12 @@ func main() {
 	// Routes
 	r.Route("/api/v1", func(r chi.Router) {
 		handler.RegisterHealthRoutes(r)
+
+		// Protected routes
+		r.Group(func(r chi.Router) {
+			r.Use(appmiddleware.APIKeyAuth(cfg.APIKey))
+			// handler.RegisterXxxRoutes(r)
+		})
 	})
 
 	log.Printf("Server running on %s", cfg.Addr)
